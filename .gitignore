@@ -5,3 +5,4 @@ Packages
 Library
 *.csproj
 *.sln
+bin
