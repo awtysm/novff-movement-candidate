@@ -26,25 +26,25 @@ public class Player : MonoBehaviour
         gravity = (-2* jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
     }
-    void Update()
+    void FixedUpdate()
     {
-        if(con.collisions.above || con.collisions.below)
-            velocity.y = 0;
+        
         Vector2 PlayerInput = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical"));
         float targetHorVelocity = PlayerInput.x * MovementSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetHorVelocity,ref currentVelocity, (con.collisions.below)?accelerationTimeGrounded:accelerationTimeInAir);
         
-        
+        if(con.collisions.above || con.collisions.below)
+            velocity.y = 0;
         if(Input.GetKey(KeyCode.Space) && con.collisions.below)
             velocity.y = jumpVelocity;
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += gravity * Time.fixedDeltaTime;
         velocity.y = Mathf.Clamp(velocity.y, -terminalVelocity, terminalVelocity);
         
         if(PlayerInput.x != 0)
             sprite.flipX = Mathf.Sign(targetHorVelocity) == -1;
 
-        con.Move(velocity * Time.deltaTime);
+        con.Move(velocity * Time.fixedDeltaTime);
 
     }
 }

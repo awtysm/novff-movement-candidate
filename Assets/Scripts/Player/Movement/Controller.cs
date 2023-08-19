@@ -24,13 +24,14 @@ public class Controller : MonoBehaviour
     RaycastOrigins raycastOrigins;
     public CollisionInfo collisions;
     [SerializeField] LayerMask collisionMask;
-    const float RaycastInset = 0.15f;
+    const float RaycastInset = 0.08f;
     [SerializeField][Range(2, 10)] int horRayCount = 5, verRayCount = 5;
     private float horRaySpacing, verRaySpacing;
 
     void Awake()
     {
-        //Application.targetFrameRate = 60;
+        Application.targetFrameRate = 300;
+
         col = GetComponent<BoxCollider2D>();
         CalcRaySpacing();
     }

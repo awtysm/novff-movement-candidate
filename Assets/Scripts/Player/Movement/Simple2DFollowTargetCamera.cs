@@ -16,7 +16,7 @@ public class Simple2DFollowTargetCamera : MonoBehaviour
     [SerializeField][Range(1, 0.01f)]private float CameraLerpTime = 0.25F;
     private float CameraSpeed = 40F;
 
-    void Update() 
+    void FixedUpdate() 
     {
         Vector3 _offset = transform.position;
         _offset.z = _target.transform.position.z;
